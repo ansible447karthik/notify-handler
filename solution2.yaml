@@ -1,0 +1,15 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: install httpd packages
+      yum:
+        name: httpd-tools
+        state: latest
+      notify: start the apache web server
+
+  handlers:
+    - name : start the apache web server
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
